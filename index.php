@@ -1,71 +1,22 @@
 <!-- index.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQL CHALLENGER</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 60px; /* Ajuster la position en fonction de votre besoin */
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-        .header {
-            background-color: #343a40;
-            color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-        .header-links a {
-            text-decoration: none;
-            color: #ffffff;
-            margin-left: 20px;
-        }
-        .menu {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .menu a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .list-group-item {
-            background-color: #ffffff;
-            margin-bottom: 10px;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        .btn {
-            margin-top: 20px;
-        }
-        .main-content {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="style/header_menu.css">
 </head>
+
 <body>
     <!-- En-tête -->
     <div class="header">
         <div class="header-title">SQL CHALLENGER</div>
+        <div class="logo">
+            <img src="img/logo_test.png" alt="Logo SQL CHALLENGER">
+        </div>
         <div class="header-links">
             <a href="connexion.php">Connexion</a>
             <a href="inscription.php">Inscription</a>
@@ -113,4 +64,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

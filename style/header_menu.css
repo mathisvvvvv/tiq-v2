@@ -1,0 +1,71 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.header {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.header-links a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+.menu {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.list-group-item {
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+.main-content {
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    max-height: 50px; /* Ajustez la hauteur maximale selon vos besoins */
+    max-width: 100%; /* Garantit que l'image ne dépasse pas la largeur du conteneur */
+}
