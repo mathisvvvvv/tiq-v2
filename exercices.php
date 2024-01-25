@@ -78,8 +78,25 @@ $bdd->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apprendre SQL</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/header_menu.css">
 </head>
 <body class="bg-light">
+    <!-- En-tête -->
+    <div class="header">
+        <div class="header-title">SQL CHALLENGER</div>
+        <div class="header-links">
+            <a href="connexion.php">Connexion</a>
+            <a href="inscription.php">Inscription</a>
+        </div>
+    </div>
+
+    <!-- Menu horizontal -->
+    <div class="menu">
+        <a href="cour.php">Cours</a>
+        <a href="exercices.php">Exercices</a>
+        <a href="forum.php">Forum</a>
+    </div>
+
     <div class="container mt-5">
         <h1 class="text-center text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
 

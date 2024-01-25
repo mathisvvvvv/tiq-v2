@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum - SQL CHALLENGER</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="header_menu.css">
-    <link rel="stylesheet" href="forum.css">
+    <link rel="stylesheet" href="style/header_menu.css">
+    <link rel="stylesheet" href="style/forum.css">
 </head>
 
 <body>
