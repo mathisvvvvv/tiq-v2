@@ -92,7 +92,7 @@ $bdd->close();
 
     <!-- Menu horizontal -->
     <div class="menu">
-        <a href="cour.php">Cours</a>
+        <a href="cours.php">Cours</a>
         <a href="exercices.php">Exercices</a>
         <a href="forum.php">Forum</a>
     </div>
