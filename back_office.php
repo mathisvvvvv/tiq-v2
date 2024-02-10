@@ -34,9 +34,9 @@ include('header.php');
                 if (!empty($userData['photo_path'])) {
                     echo '<img src="' . $userData['photo_path'] . '" alt="Photo de profil" class="profile-photo">';
                 }
-                echo '<a href="account.php">' . $username . '</a>';
+                echo '<a  style="font-weight: bold; font-size: 1.2em;" href="account.php">' . $username . '</a>';
                 if ($userData['admin']) {
-                    echo '<a href="back_office.php" class="btn btn-info ml-2">Admin</a>';
+                    echo '<a href="back_office.php">Admin</a>';
                 }
                 echo '<a href="logout.php">Déconnexion</a>';
                 
@@ -55,20 +55,15 @@ include('header.php');
         <a href="forum.php">Forum</a>
     </div>
 
-    <div class="container mt-3">
-        <!-- Main Content -->
-        <div class="main-content">
-            <h1 class="text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
-            <ul class="list-group">
-
-            </ul>
-            <?php
-            // Affichez le bouton pour ajouter une question uniquement si l'utilisateur est connecté
-            if (isset($_SESSION['username'])) {
-                echo '<a href="add_question.php" class="btn btn-success mt-3">Ajouter une question</a>';
-            }
-            ?>
-        </div>
+    <div class="container mt-5">
+        <h1>Ajouter une question</h1>
+        <form action="traitement_question.php" method="post">
+            <label for="question">Question :</label>
+            <input type="text" name="question" required><br>
+            <label for="reponse">Réponse :</label>
+            <input type="text" name="reponse" required><br>
+            <input type="submit" value="Ajouter">
+        </form>
     </div>
 
     <!-- Bootstrap JS -->

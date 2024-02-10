@@ -31,7 +31,15 @@
         <h1 class="text-center">Inscription</h1>
 
         <div class="col-md-6 offset-md-3">
-            <form action="traitement_inscription.php" method="post">
+            <form action="traitement_inscription.php" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="photo">Choisissez une photo :</label>
+                    <input type="file" name="photo" id="photo" accept="image/*" onchange="previewImage(this)" class="form-control-file photo-profil">
+                    <div class="photo-preview-container">
+                        <img id="preview" src="#" alt="Aperçu de la photo" class="photo-profil-preview">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="nom">Nom :</label>
                     <input type="text" name="nom" class="form-control" required>
@@ -56,6 +64,7 @@
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="passwordInput" name="password" class="form-control" required>
                 </div>
+                <!-- Ajoutez les autres champs ici avec leurs div.form-group correspondantes -->
 
                 <a class="btn btn-danger mb-3 mt-3 mr-3" href="index.php">Annuler</a>
                 <button class="btn btn-warning mb-3 mt-3 ml-3" type="submit">S'inscrire</button>
@@ -66,6 +75,23 @@
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Ajoutez ici votre script JavaScript pour l'aperçu de l'image -->
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('preview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Exemple de vérification basique (à améliorer)
     // Utilisez password_verify pour vérifier le mot de passe haché
     $sql = "SELECT * FROM utilisateurs WHERE username = :username";
-    
+
     // Assurez-vous que la connexion à la base de données est réussie
     if ($bdd) {
         $stmt = $bdd->prepare($sql);
@@ -71,7 +71,7 @@ if ($authentication_successful) {
 
 <body>
     <!-- En-tête -->
-    <div class="header">
+    <div class="header d-flex justify-content-between align-items-center">
         <div class="header-title">SQL CHALLENGER</div>
         <div class="header-links">
             <a href="connexion.php">Connexion</a>
@@ -87,7 +87,8 @@ if ($authentication_successful) {
     </div>
 
     <div class="container">
-        <h3>Identification</h3>
+        <h3 style="color: #007bff; font-size: 2rem; font-weight: bold;">Connexion</h3>
+
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
@@ -100,13 +101,20 @@ if ($authentication_successful) {
             </div>
 
             <div class="d-flex justify-content-between">
-                <a class="btn btn-danger btn-block mb-2 mt-2 mr-5" href="index.php">Annuler</a>
-                <input class="btn btn-success btn-block mb-2 mt-2 ml-5" type="submit" value="Connexion">
+                <a class="btn btn-danger btn-block mb-4 mt-4 mr-5" href="index.php">Annuler</a>
+                <input class="btn btn-success btn-block mb-4 mt-4 ml-5" type="submit" value="Connexion">
             </div>
         </form>
         <a class="mt-4" href="index.php">Retour à la page d'accueil</a>
     </div>
-
+    
+    <!-- Barre latérale en bas -->
+    <div class="footer-sidebar bg-dark fixed-bottom text-white p-4">
+        <h4>Coordonnées de l'entreprise</h4>
+        <p>Adresse : Peixotto</p>
+        <p>Téléphone : 06 06 06 06 06</p>
+        <p>Email : COUCOU</p>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

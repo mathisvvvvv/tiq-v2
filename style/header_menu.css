@@ -10,8 +10,8 @@ body {
 }
 
 .header {
-    background-color: #343a40;
-    color: #ffffff;
+    background-color: #f9e78b;
+    color: #000000;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -25,13 +25,13 @@ body {
 
 .header-links a {
     text-decoration: none;
-    color: #ffffff;
+    color: #000000;
     margin-left: 20px;
 }
 
 .menu {
     background-color: #007bff;
-    color: #ffffff;
+    color: #000000;
     padding: 10px;
     display: flex;
     justify-content: space-around;
@@ -68,4 +68,29 @@ body {
 .logo img {
     max-height: 50px; /* Ajustez la hauteur maximale selon vos besoins */
     max-width: 100%; /* Garantit que l'image ne dépasse pas la largeur du conteneur */
+}
+
+.photo-preview-container {
+    width: 50px; /* Définir la largeur du conteneur */
+    height: 50px; /* Définir la hauteur du conteneur */
+    overflow: hidden; /* Cacher tout contenu dépassant du conteneur */
+    border-radius: 50%; /* Créer un cercle en utilisant un bord arrondi à 50% de la largeur/hauteur */
+    display: inline-block; /* Permet d'aligner l'élément à côté de l'input */
+    margin-left: 10px; /* Ajuster la marge pour l'espacement */
+}
+
+.photo-profil-preview {
+    width: 50px; /* Définir la largeur du cercle */
+    height: 50px; /* Définir la hauteur du cercle */
+    object-fit: cover; /* Couvrir tout le cercle tout en préservant les proportions de l'image */
+    border-radius: 50%; /* Assurer que l'image est affichée en tant que cercle */
+    display: block; /* Résoudre tout problème d'espacement supplémentaire */
+    margin-top: 5px; /* Ajuster la marge supérieure pour l'espacement */
+}
+
+.profile-photo {
+    width: 50px; /* Ajustez la taille selon vos besoins */
+    height: 50px;
+    border-radius: 50%; /* Pour une photo de profil arrondie */
+    margin-right: 10px; /* Espace entre la photo et le texte */
 }
