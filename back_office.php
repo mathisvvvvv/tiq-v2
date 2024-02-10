@@ -56,14 +56,12 @@ include('header.php');
     </div>
 
     <div class="container mt-5">
-        <h1>Ajouter une question</h1>
-        <form action="traitement_question.php" method="post">
-            <label for="question">Question :</label>
-            <input type="text" name="question" required><br>
-            <label for="reponse">Réponse :</label>
-            <input type="text" name="reponse" required><br>
-            <input type="submit" value="Ajouter">
-        </form>
+        <div class="text-center">
+            <!-- Bouton pour ajouter une question -->
+            <a href="add_question.php" class="btn btn-primary mr-2">Ajouter une question</a>
+            <!-- Bouton pour gérer les questions -->
+            <a href="gerer_questions.php" class="btn btn-secondary">Gérer les questions</a>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->

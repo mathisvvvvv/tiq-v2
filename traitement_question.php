@@ -10,12 +10,14 @@ if (!$bdd) {
 // Récupération des données du formulaire
 $question = $_POST['question'];
 $reponse = $_POST['reponse'];
+$level = $_POST['level'];
 
 // Ajout des données à la base de données
-$query = "INSERT INTO questions (question, reponse) VALUES (:question, :reponse)";
+$query = "INSERT INTO questions (question, reponse, level) VALUES (:question, :reponse, :level) ";
 $statement = $bdd->prepare($query);
 $statement->bindValue(':question', $question, SQLITE3_TEXT);
 $statement->bindValue(':reponse', $reponse, SQLITE3_TEXT);
+$statement->bindValue(':level', $level, SQLITE3_TEXT);
 $statement->execute();
 
 // Fermeture de la connexion

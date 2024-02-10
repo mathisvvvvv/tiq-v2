@@ -36,7 +36,7 @@ include('header.php');
                 }
                 echo '<a href="account.php">' . $username . '</a>';
                 if ($userData['admin']) {
-                    echo '<a href="back_office.php" class="btn btn-info ml-2">Admin</a>';
+                    echo '<a href="back_office.php">Admin</a>';
                 }
                 echo '<a href="logout.php">Déconnexion</a>';
                 
@@ -58,16 +58,8 @@ include('header.php');
     <div class="container mt-3">
         <!-- Main Content -->
         <div class="main-content">
-            <h1 class="text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
-            <ul class="list-group">
+            <h1 class="text-info mb-4">Bienvenue</h1>
 
-            </ul>
-            <?php
-            // Affichez le bouton pour ajouter une question uniquement si l'utilisateur est connecté
-            if (isset($_SESSION['username'])) {
-                echo '<a href="add_question.php" class="btn btn-success mt-3">Ajouter une question</a>';
-            }
-            ?>
         </div>
     </div>
 
