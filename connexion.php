@@ -111,9 +111,9 @@ if ($authentication_successful) {
     <!-- Barre latérale en bas -->
     <div class="footer-sidebar bg-dark fixed-bottom text-white p-4">
         <h4>Coordonnées de l'entreprise</h4>
-        <p>Adresse : Peixotto</p>
+        <p>Adresse : Université de Bordeaux</p>
         <p>Téléphone : 06 06 06 06 06</p>
-        <p>Email : COUCOU</p>
+        <p>Email : sqlchallenger@gmail.com</p>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
