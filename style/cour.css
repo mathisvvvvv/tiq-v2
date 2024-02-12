@@ -1,0 +1,36 @@
+/* Styles pour le menu latéral */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 114px;
+    /* Ajustez la hauteur pour laisser de l'espace avec l'en-tête */
+    left: 0;
+    background-color: #000000;
+    /* Couleur de fond du menu latéral */
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #ffffff;
+    display: block;
+}
+
+.sidebar ul {
+    color: white;
+}
+
+.sidebar a:hover {
+    color: #ffffff;
+}
+
+.main-content {
+    margin-left: 120px;
+    /* Largeur du menu latéral */
+    padding: 12px;
+}

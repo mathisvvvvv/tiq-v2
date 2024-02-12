@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 include('header.php');
 
 // Inclure le fichier de connexion à la base de données si nécessaire

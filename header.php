@@ -1,6 +1,5 @@
 <?php
 // Démarrez la session
-session_start();
 
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['username'])) {
