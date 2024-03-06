@@ -24,7 +24,7 @@ include('header.php');
     <div class="header">
         <div class="header-title text-center">SQL CHALLENGER</div>
         <div class="logo">
-            <img src="img/logo_test.png" alt="Logo SQL CHALLENGER">
+            <img src="img/logo.png" alt="Logo SQL CHALLENGER">
         </div>
         <div class="header-links">
             <?php

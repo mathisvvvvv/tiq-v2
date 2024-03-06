@@ -70,14 +70,15 @@ if ($authentication_successful) {
 </head>
 
 <body>
-    <!-- En-tête -->
-    <div class="header d-flex justify-content-between align-items-center">
-        <div class="header-title">SQL CHALLENGER</div>
-        <div class="header-links">
-            <a href="connexion.php">Connexion</a>
-            <a href="inscription.php">Inscription</a>
-        </div>
+<!-- En-tête -->
+<div class="header ">
+    <div class="header-title">SQL CHALLENGER</div>
+    <div class="header-links">
+        <a href="connexion.php">Connexion</a>
+        <a href="inscription.php">Inscription</a>
+    
     </div>
+</div>
 
     <!-- Menu horizontal -->
     <div class="menu">
