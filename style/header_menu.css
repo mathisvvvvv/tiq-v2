@@ -10,7 +10,7 @@ body {
 }
 
 .header {
-    background-color: #f9e78b;
+    background-color: blueviolet;
     color: #000000;
     padding: 10px;
     display: flex;
@@ -35,7 +35,7 @@ body {
 }
 
 .menu {
-    background-color: #007bff;
+    background-color: #324AB2;
     color: #000000;
     padding: 10px;
     display: flex;
