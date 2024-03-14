@@ -24,7 +24,6 @@ body {
     font-weight: bold;
     flex: 1; 
     text-align: center;
-    margin-right: -400px; 
 
 }
 
@@ -65,11 +64,11 @@ body {
 }
 
 .logo {
-    align-items: left;
+    
 }
 
 .logo img {
-    max-height: 100px; /* Ajustez la hauteur maximale selon vos besoins */
+    max-height: 130px; /* Ajustez la hauteur maximale selon vos besoins */
     max-width: 150%; /* Garantit que l'image ne dépasse pas la largeur du conteneur */
 }
 

@@ -47,4 +47,3 @@ header("Location: gerer_questions.php");
 exit();
 
 ?>
-

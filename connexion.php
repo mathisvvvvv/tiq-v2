@@ -71,9 +71,12 @@ if ($authentication_successful) {
 
 <body>
 <!-- En-tête -->
-<div class="header ">
-    <div class="header-title">SQL CHALLENGER</div>
-    <div class="header-links">
+<div class="header">
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo SQL CHALLENGER">
+        </div>
+        <div class="header-title text-center">SQL CHALLENGER</div>
+        <div class="header-links">
         <a href="connexion.php">Connexion</a>
         <a href="inscription.php">Inscription</a>
     
