@@ -77,18 +77,10 @@ if ($authentication_successful) {
         </div>
         <div class="header-title text-center">SQL CHALLENGER</div>
         <div class="header-links">
-        <a href="connexion.php">Connexion</a>
         <a href="inscription.php">Inscription</a>
     
     </div>
 </div>
-
-    <!-- Menu horizontal -->
-    <div class="menu">
-        <a href="cours.php">Cours</a>
-        <a href="exercices.php">Exercices</a>
-        <a href="forum.php">Forum</a>
-    </div>
 
     <div class="container">
         <h3 style="color: #007bff; font-size: 2rem; font-weight: bold;">Connexion</h3>
