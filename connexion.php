@@ -97,11 +97,10 @@ if ($authentication_successful) {
             </div>
 
             <div class="d-flex justify-content-between">
-                <a class="btn btn-danger btn-block mb-4 mt-4 mr-5" href="index.php">Annuler</a>
-                <input class="btn btn-success btn-block mb-4 mt-4 ml-5" type="submit" value="Connexion">
+                <input class="btn btn-success " type="submit" value="Connexion">
             </div>
         </form>
-        <a class="mt-4" href="index.php">Retour à la page d'accueil</a>
+        <a class="mt-4" href="??">Mot de passe oublié</a>
     </div>
     
     <!-- Barre latérale en bas -->
