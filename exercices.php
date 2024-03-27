@@ -45,20 +45,41 @@ $currentQuestion = isset($_SESSION['questions'][$questionIndex]) ? $_SESSION['qu
 
 // Exécuter la requête de l'utilisateur
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $sql_query = $_POST['sql_query'] ?? '';
 
-    // Exécuter la requête de l'utilisateur
-    $userResult = $bdd->query($sql_query);
+    // Vérifier si la requête de l'utilisateur contient des mots réservés
+    $reservedWords = array("admin", "questions", "utilisateurs"); // Ajoutez d'autres mots réservés au besoin
+    $containsReservedWord = false;
+    foreach ($reservedWords as $word) {
+        if (stripos($sql_query, $word) !== false) {
+            $containsReservedWord = true;
+            break;
+        }
+    }
 
-    // Exécuter la requête stockée dans le champ "answer"
-    $answer = $currentQuestion['reponse'];
-    $answerResult = $bdd->query($answer);
-
-    // Comparer les résultats des deux requêtes
-    if (compareResults($userResult, $answerResult)) {
-        echo "Félicitations ! Votre réponse est correcte.";
+    // Exécuter la requête de l'utilisateur seulement si elle ne contient pas de mots réservés
+    if ($containsReservedWord) {
+        echo '<script>alert("La requête contient des mots réservés. Veuillez réessayer.");</script>';
     } else {
-        echo "Désolé, votre réponse est incorrecte.";
+        // Exécuter la requête de l'utilisateur seulement si elle ne contient pas de mots réservés
+        $userResult = $bdd->query($sql_query);
+
+        // Récupérer la réponse attendue de la question courante
+        $answer = isset($currentQuestion['reponse']) ? $currentQuestion['reponse'] : '';
+
+        // Exécuter la réponse attendue seulement si elle est définie
+        if (!empty($answer)) {
+            $answerResult = $bdd->query($answer);
+        }
+
+
+        // Comparer les résultats des deux requêtes
+        // if (compareResults($userResult, $answerResult)) {
+        //    echo "Félicitations ! Votre réponse est correcte.";
+        // } else {
+        //    echo "Désolé, votre réponse est incorrecte.";
+        // }
     }
 }
 
@@ -66,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $bdd->close();
 
 // Fonction pour comparer les résultats des requêtes
-function compareResults($result1, $result2) {
+function compareResults($result1, $result2)
+{
     // Convertir les résultats en tableaux associatifs
     $array1 = [];
     while ($row = $result1->fetchArray(SQLITE3_ASSOC)) {
@@ -84,6 +106,7 @@ function compareResults($result1, $result2) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,13 +114,16 @@ function compareResults($result1, $result2) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/header_menu.css">
 </head>
+
 <body>
     <!-- En-tête -->
     <div class="header">
         <div class="logo">
             <img src="img/logo.png" alt="Logo SQL CHALLENGER">
         </div>
-        <div class="header-title text-center">SQL CHALLENGER</div>
+        <div class="header-title text-center">
+            <a href="index.php" style="text-decoration: none; color: inherit;">SQL CHALLENGER</a>
+        </div>
         <div class="header-links">
             <?php
             // Affichez les liens de connexion/inscription ou de données du compte/déconnexion en fonction de la connexion de l'utilisateur
@@ -119,7 +145,6 @@ function compareResults($result1, $result2) {
         </div>
     </div>
 
-
     <!-- Menu horizontal -->
     <div class="menu">
         <a href="cours.php">Cours</a>
@@ -132,46 +157,47 @@ function compareResults($result1, $result2) {
             <h1 class="text-center text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
 
             <?php if ($currentQuestion) : ?>
-            <h2>Question en cours:</h2>
-            <p><strong>Question:</strong> <?php echo $currentQuestion['question']; ?></p>
-        <?php endif; ?>
+                <h2>Question en cours:</h2>
+                <p><strong>Question:</strong> <?php echo $currentQuestion['question']; ?></p>
+            <?php endif; ?>
 
-        <?php if (!empty($tableName) && !empty($tableData)) : ?>
-            <h2>Contenu de la table "<?php echo $tableName; ?>" :</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <?php foreach ($tableData[0] as $columnName => $value) : ?>
-                            <th><?php echo $columnName; ?></th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($tableData as $row) : ?>
+            <?php if (!empty($tableName) && !empty($tableData)) : ?>
+                <h2>Contenu de la table "<?php echo $tableName; ?>" :</h2>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <?php foreach ($row as $value) : ?>
-                                <td><?php echo $value; ?></td>
+                            <?php foreach ($tableData[0] as $columnName => $value) : ?>
+                                <th><?php echo $columnName; ?></th>
                             <?php endforeach; ?>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($tableData as $row) : ?>
+                            <tr>
+                                <?php foreach ($row as $value) : ?>
+                                    <td><?php echo $value; ?></td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
 
             <h2>Entrez votre requête SQL :</h2>
             <form action="exercices.php" method="post">
                 <div class="form-group">
-                    <textarea name="sql_query" rows="8" cols="50" class="form-control" required></textarea>
+                    <textarea name="sql_query" rows="8" cols="50" class="form-control" required><?php echo isset($_POST['sql_query']) ? htmlspecialchars($_POST['sql_query']) : ''; ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Exécuter la requête</button>
             </form>
-
+            
             <?php if ($currentQuestion) : ?>
-            <form action="exercices.php" method="post">
-                <input type="hidden" name="answer" value="<?php echo $currentQuestion['answer']; ?>">
-                <button type="submit" class="btn btn-success mt-3" name="validate">Valider</button>
-            </form>
+                <form action="exercices.php" method="post">
+                    <input type="hidden" name="answer" value="<?php echo htmlspecialchars($currentQuestion['answer']); ?>">
+                    <button type="submit" class="btn btn-success mt-3" name="validate">Valider</button>
+                </form>
             <?php endif; ?>
+
         </div>
         <div class="query-results">
             <?php
@@ -228,8 +254,9 @@ function compareResults($result1, $result2) {
             ?>
         </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
