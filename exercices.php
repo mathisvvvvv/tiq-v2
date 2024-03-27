@@ -94,11 +94,11 @@ $bdd->close();
 
     <div class="container mt-5">
         <div class="query-form">
-            <h1 class="text-center text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
+            <h1 class="text-center text-info mb-4">Entraînes-toi !</h1>
 
             <?php if ($currentQuestion) : ?>
-            <h2>Question en cours:</h2>
-            <p><strong>Question:</strong> <?php echo $currentQuestion['question']; ?></p>
+            <h2>Question :</h2>
+            <p><?php echo $currentQuestion['question']; ?></p>
         <?php endif; ?>
 
         <?php if (!empty($tableName) && !empty($tableData)) : ?>
@@ -123,7 +123,7 @@ $bdd->close();
             </table>
         <?php endif; ?>
 
-            <h2>Entrez votre requête SQL :</h2>
+            <h2>Entrez votre requête :</h2>
             <form action="exercices.php" method="post">
                 <div class="form-group">
                     <textarea name="sql_query" rows="8" cols="50" class="form-control" required></textarea>
