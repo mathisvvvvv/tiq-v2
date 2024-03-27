@@ -76,7 +76,9 @@ $bdd->close();
         <div class="logo">
             <img src="img/logo.png" alt="Logo SQL CHALLENGER">
         </div>
-        <div class="header-title text-center">SQL CHALLENGER</div>
+        <div class="header-title text-center">
+            <a href="index.php" style="text-decoration: none; color: inherit;">SQL CHALLENGER</a>
+        </div>
         <div class="header-links">
             <a href="index.php">Accueil</a>
             <a href="logout.php">Déconnexion</a>
