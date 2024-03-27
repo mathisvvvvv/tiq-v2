@@ -67,9 +67,14 @@ include('header.php');
             <div class="col-md-2 sidebar">
                 <h3 style="color: white">Catégories</h3>
                 <ul>
-                    <li><a href="#" onclick="changeContent('SELECT Basique')">SELECT Basique</a></li>
-                    <li><a href="#" onclick="changeContent('Joins')">Joins</a></li>
+                    <li><a href="#" onclick="changeContent('SELECT')">SELECT</a></li>
+                        <ul>
+                        <li><a href="#" onclick="changeContent('SELECT DISTINCT')">SELECT DISTINCT</a></li>
+                        </ul>
+                    <li><a href="#" onclick="changeContent('SELECT DISTINCT')">SELECT DISTINCT</a></li>
+                    <li><a href="#" onclick="changeContent('Jointure')">Jointure</a></li>
                     <li><a href="#" onclick="changeContent('Aggregations')">Aggregations</a></li>
+                    
                 </ul>
             </div>
 
@@ -86,26 +91,27 @@ include('header.php');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        function changeContent(category) {
-            // Récupérer l'élément avec l'ID "content"
-            var contentElement = document.getElementById('content');
+    function changeContent(category) {
+        // Récupérer l'élément avec l'ID "content"
+        var contentElement = document.getElementById('content');
 
-            // Modifier le contenu en fonction de la catégorie
-            switch (category) {
-                case 'SELECT Basique':
-                    contentElement.innerHTML = '<h1>SELECT Basique</h1><p>Contenu pour SELECT Basique...</p>';
-                    break;
-                case 'Joins':
-                    contentElement.innerHTML = '<h1>Joins</h1><p>Contenu pour Joins...</p>';
-                    break;
-                case 'Aggregations':
-                    contentElement.innerHTML = '<h1>Aggregations</h1><p>Contenu pour Aggregations...</p>';
-                    break;
-                default:
-                    contentElement.innerHTML = '<p>Sélectionnez une catégorie pour afficher le contenu correspondant.</p>';
-            }
+        // Modifier le contenu en fonction de la catégorie
+        switch (category) {
+            case 'SELECT':
+                contentElement.innerHTML = '<h1>SELECT</h1><p>Contenu pour SELECT Basique...</p>';
+                break;
+            case 'Jointure':
+                contentElement.innerHTML = '<h1>Jointure</h1><p>test</p>';
+                break;
+            case 'Aggregations':
+                contentElement.innerHTML = '<h1>Aggregations</h1><p>Contenu pour Aggregations...</p>';
+                break;
+            default:
+                contentElement.innerHTML = '<p>Sélectionnez une catégorie pour afficher le contenu correspondant.</p>';
         }
-    </script>
+    }
+</script>
+
 </body>
 
 </html>
