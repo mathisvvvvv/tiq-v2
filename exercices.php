@@ -43,10 +43,45 @@ if (!empty($tableName)) {
 // Afficher la question actuelle
 $currentQuestion = isset($_SESSION['questions'][$questionIndex]) ? $_SESSION['questions'][$questionIndex] : null;
 
+// Exécuter la requête de l'utilisateur
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $sql_query = $_POST['sql_query'] ?? '';
+
+    // Exécuter la requête de l'utilisateur
+    $userResult = $bdd->query($sql_query);
+
+    // Exécuter la requête stockée dans le champ "answer"
+    $answer = $currentQuestion['reponse'];
+    $answerResult = $bdd->query($answer);
+
+    // Comparer les résultats des deux requêtes
+    if (compareResults($userResult, $answerResult)) {
+        echo "Félicitations ! Votre réponse est correcte.";
+    } else {
+        echo "Désolé, votre réponse est incorrecte.";
+    }
+}
+
 // Fermeture de la connexion
 $bdd->close();
-?>
 
+// Fonction pour comparer les résultats des requêtes
+function compareResults($result1, $result2) {
+    // Convertir les résultats en tableaux associatifs
+    $array1 = [];
+    while ($row = $result1->fetchArray(SQLITE3_ASSOC)) {
+        $array1[] = $row;
+    }
+
+    $array2 = [];
+    while ($row = $result2->fetchArray(SQLITE3_ASSOC)) {
+        $array2[] = $row;
+    }
+
+    // Comparer les tableaux associatifs
+    return $array1 === $array2;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -94,11 +129,11 @@ $bdd->close();
 
     <div class="container mt-5">
         <div class="query-form">
-            <h1 class="text-center text-info mb-4">Entraînes-toi !</h1>
+            <h1 class="text-center text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
 
             <?php if ($currentQuestion) : ?>
-            <h2>Question :</h2>
-            <p><?php echo $currentQuestion['question']; ?></p>
+            <h2>Question en cours:</h2>
+            <p><strong>Question:</strong> <?php echo $currentQuestion['question']; ?></p>
         <?php endif; ?>
 
         <?php if (!empty($tableName) && !empty($tableData)) : ?>
@@ -123,15 +158,21 @@ $bdd->close();
             </table>
         <?php endif; ?>
 
-            <h2>Entrez votre requête :</h2>
+            <h2>Entrez votre requête SQL :</h2>
             <form action="exercices.php" method="post">
                 <div class="form-group">
                     <textarea name="sql_query" rows="8" cols="50" class="form-control" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Exécuter la requête</button>
             </form>
-        </div>
 
+            <?php if ($currentQuestion) : ?>
+            <form action="exercices.php" method="post">
+                <input type="hidden" name="answer" value="<?php echo $currentQuestion['answer']; ?>">
+                <button type="submit" class="btn btn-success mt-3" name="validate">Valider</button>
+            </form>
+            <?php endif; ?>
+        </div>
         <div class="query-results">
             <?php
             // Connexion à la base de données SQLite
@@ -164,6 +205,13 @@ $bdd->close();
                             echo "</tr>";
                         }
                         echo "</table>";
+
+                        // Formulaire pour valider la réponse de l'utilisateur
+                        echo "<form action='exercices.php' method='post'>";
+                        echo "<input type='hidden' name='answer' value=\"" . htmlspecialchars($currentQuestion['answer']) . "\">"; // Champ caché pour stocker la réponse attendue
+                        echo "<input type='hidden' name='sql_query' value=\"" . htmlspecialchars($sql_query) . "\">"; // Champ caché pour stocker la requête de l'utilisateur
+                        echo "<button type='submit' name='validate' class='btn btn-primary'>Valider</button>";
+                        echo "</form>";
                     } else {
                         // Affichage d'un message d'erreur si la requête a échoué
                         echo "<h2>Erreur lors de l'exécution de la requête :</h2>";
@@ -179,7 +227,6 @@ $bdd->close();
             $bdd->close();
             ?>
         </div>
-    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
