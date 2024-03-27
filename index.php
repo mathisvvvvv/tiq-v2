@@ -61,7 +61,7 @@ include('header.php');
         <div class="logo">
             <img src="img/logo.png" alt="Logo SQL CHALLENGER">
         </div>
-        <div class="header-title text-center">
+        <div class="header-title">
             <a href="index.php" style="text-decoration: none; color: inherit;">SQL CHALLENGER</a>
         </div>
 

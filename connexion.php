@@ -75,7 +75,7 @@ if ($authentication_successful) {
         <div class="logo">
             <img src="img/logo.png" alt="Logo SQL CHALLENGER">
         </div>
-        <div class="header-title text-center">SQL CHALLENGER</div>
+        <div class="header-title">SQL CHALLENGER</div>
         <div class="header-links">
         <a href="inscription.php">Inscription</a>
     
@@ -97,7 +97,7 @@ if ($authentication_successful) {
             </div>
 
             <div class="d-flex justify-content-between">
-                <input class="btn btn-success " type="submit" value="Connexion">
+                <input class="btn btn-success" type="submit" value="Connexion">
             </div>
         </form>
         <a class="mt-4" href="??">Mot de passe oublié</a>

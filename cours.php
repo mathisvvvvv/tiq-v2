@@ -61,22 +61,25 @@ include('header.php');
     </div>
 
     
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Menu latéral -->
-            <div class="col-md-2 sidebar">
-                <h3 style="color: white">Catégories</h3>
-                <ul>
-                    <li><a href="#" onclick="changeContent('SELECT')">SELECT</a></li>
-                        <ul>
-                        <li><a href="#" onclick="changeContent('SELECT DISTINCT')">SELECT DISTINCT</a></li>
-                        </ul>
-                    <li><a href="#" onclick="changeContent('SELECT DISTINCT')">SELECT DISTINCT</a></li>
-                    <li><a href="#" onclick="changeContent('Jointure')">Jointure</a></li>
-                    <li><a href="#" onclick="changeContent('Aggregations')">Aggregations</a></li>
-                    
-                </ul>
-            </div>
+    <div class="col-md-2 sidebar">
+    <h3 style="color: white">Catégories</h3>
+    <ul>
+        <li>
+            <a href="#" onclick="changeContent('SELECT')">SELECT</a>
+            <ul>
+                <li><a href="#" onclick="changeContent('SELECT DISTINCT')">SELECT DISTINCT</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="changeContent('WHERE')">WHERE</a></li>
+            <ul>
+                <li><a href="#" onclick="changeContent('AND & OR')">AND & OR</a></li>
+                <li><a href="#" onclick="changeContent('IN')">IN</a></li>
+            </ul>
+        <li><a href="#" onclick="changeContent('Jointure')">Jointure</a></li>
+        <li><a href="#" onclick="changeContent('Aggregations')">Aggregations</a></li>
+    </ul>
+</div>
+
 
             <!-- Contenu principal -->
             <div class="col-md-10 main-content" id="content">
@@ -98,11 +101,24 @@ include('header.php');
         // Modifier le contenu en fonction de la catégorie
         switch (category) {
             case 'SELECT':
-                contentElement.innerHTML = '<h1>SELECT</h1><p>Contenu pour SELECT Basique...</p>';
+                contentElement.innerHTML = '<h1>SELECT</h1><p>Contenu pour SELECT</p>';
+                break;
+            case 'SELECT DISTINCT':
+                contentElement.innerHTML = '<h1>SELECT DISTINCT</h1><p>Contenu pour SELECT DISTINCT</p>';
+                break;
+            case 'WHERE':
+                contentElement.innerHTML = '<h1>WHERE</h1><p>Contenu pour WHERE...</p>';
+                break;
+            case 'AND & OR':
+                contentElement.innerHTML = '<h1>AND & OR</h1><p>Contenue pour et & ou</p>';
+                break;
+            case 'IN':
+                contentElement.innerHTML = '<h1>IN</h1><p>Contenue pour IN</p>';
                 break;
             case 'Jointure':
                 contentElement.innerHTML = '<h1>Jointure</h1><p>test</p>';
                 break;
+                
             case 'Aggregations':
                 contentElement.innerHTML = '<h1>Aggregations</h1><p>Contenu pour Aggregations...</p>';
                 break;
