@@ -24,71 +24,38 @@ if (!isset($_SESSION['question_index'])) {
     $_SESSION['question_index'] = 0;
 }
 
-// Vérifier si le formulaire a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer la réponse soumise par le formulaire
-    $reponseSoumise = $_POST['reponse'] ?? '';
+// Récupérer le nom de la table à afficher depuis la base de données
+$tableName = '';
+$questionIndex = $_SESSION['question_index'];
+if (isset($_SESSION['questions'][$questionIndex]['bdd'])) {
+    $tableName = $_SESSION['questions'][$questionIndex]['bdd'];
+}
 
-    // Récupérer la réponse correcte de la base de données
-    $questionIndex = $_SESSION['question_index'];
-
-    // Vérifier si la clé existe dans le tableau
-    if (isset($_SESSION['questions'][$questionIndex])) {
-        $currentQuestion = $_SESSION['questions'][$questionIndex];
-
-        echo '<!DOCTYPE html>';
-        echo '<html lang="en">';
-        echo '<head>';
-        echo '<meta charset="UTF-8">';
-        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-        echo '<title>Résultat de la vérification</title>';
-        echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">';
-        echo '</head>';
-        echo '<body class="bg-light">';
-        echo '<div class="container mt-5">';
-        if ($reponseSoumise == $currentQuestion['reponse']) {
-            echo '<h1 class="text-center text-success mb-4">Bravo ! La réponse est correcte.</h1>';
-        } else {
-            echo '<h1 class="text-center text-danger mb-4">Désolé, la réponse est incorrecte.</h1>';
-        }
-        echo '<a href="exercices.php" class="btn btn-secondary mt-3">Revenir à l\'exercice</a>';
-        echo '</div>';
-        echo '</body>';
-        echo '</html>';
-        exit; // Arrêter l'exécution du reste du code après l'affichage du résultat
+// Récupérer les données de la table spécifiée
+$tableData = [];
+if (!empty($tableName)) {
+    $tableResult = $bdd->query("SELECT * FROM $tableName");
+    while ($row = $tableResult->fetchArray(SQLITE3_ASSOC)) {
+        $tableData[] = $row;
     }
 }
 
 // Afficher la question actuelle
-$questionIndex = $_SESSION['question_index'];
-if (isset($_SESSION['questions'][$questionIndex])) {
-    $currentQuestion = $_SESSION['questions'][$questionIndex];
-} else {
-    // Si la question n'existe pas, rediriger vers la page d'accueil
-    header("Location: index.php");
-    exit;
-}
+$currentQuestion = isset($_SESSION['questions'][$questionIndex]) ? $_SESSION['questions'][$questionIndex] : null;
 
 // Fermeture de la connexion
 $bdd->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQL CHALLENGER</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/header_menu.css">
-    <style>
-        .center-title {
-            text-align: center;
-        }
-    </style>
 </head>
-
 <body>
     <!-- En-tête -->
     <div class="header">
@@ -100,7 +67,6 @@ $bdd->close();
             <?php
             // Affichez les liens de connexion/inscription ou de données du compte/déconnexion en fonction de la connexion de l'utilisateur
             if (isset($_SESSION['username'])) {
-                
                 // Affichez la photo de profil si le chemin est disponible
                 if (!empty($userData['photo_path'])) {
                     echo '<img src="' . $userData['photo_path'] . '" alt="Photo de profil" class="profile-photo">';
@@ -110,7 +76,6 @@ $bdd->close();
                     echo '<a href="back_office.php">Admin</a>';
                 }
                 echo '<a href="logout.php">Déconnexion</a>';
-                
             } else {
                 echo '<a href="connexion.php">Connexion</a>';
                 echo '<a href="inscription.php">Inscription</a>';
@@ -128,32 +93,92 @@ $bdd->close();
     </div>
 
     <div class="container mt-5">
-        <h1 class="text-center text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
+        <div class="query-form">
+            <h1 class="text-center text-info mb-4">Apprendre SQL - Questions et Réponses</h1>
 
-        <?php
-        // Afficher la question actuelle
-        echo '<h2>Question en cours:</h2>';
-        echo '<p><strong>Question:</strong> ' . $currentQuestion['question'] . '</p>';
-        ?>
+            <?php if ($currentQuestion) : ?>
+            <h2>Question en cours:</h2>
+            <p><strong>Question:</strong> <?php echo $currentQuestion['question']; ?></p>
+        <?php endif; ?>
 
-        <form action="exercices.php" method="post">
-            <div class="form-group">
-                <label for="reponse">Votre réponse :</label>
-                <input type="text" class="form-control" id="reponse" name="reponse" required>
-            </div>
-            <input type="hidden" name="question_index" value="<?php echo $questionIndex; ?>">
-            <button type="submit" class="btn btn-primary">Vérifier la réponse</button>
-        </form>
+        <?php if (!empty($tableName) && !empty($tableData)) : ?>
+            <h2>Contenu de la table "<?php echo $tableName; ?>" :</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <?php foreach ($tableData[0] as $columnName => $value) : ?>
+                            <th><?php echo $columnName; ?></th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tableData as $row) : ?>
+                        <tr>
+                            <?php foreach ($row as $value) : ?>
+                                <td><?php echo $value; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
 
-        <a href="index.php" class="btn btn-secondary mt-3">Retour à la page d'accueil</a>
+            <h2>Entrez votre requête SQL :</h2>
+            <form action="exercices.php" method="post">
+                <div class="form-group">
+                    <textarea name="sql_query" rows="8" cols="50" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Exécuter la requête</button>
+            </form>
+        </div>
 
-        <?php
-        // Bouton "Question suivante"
-        $nextQuestionIndex = $questionIndex + 1;
-        if (isset($_SESSION['questions'][$nextQuestionIndex])) {
-            echo '<a href="exercices.php" class="btn btn-success mt-3">Question suivante</a>';
-        }
-        ?>
+        <div class="query-results">
+            <?php
+            // Connexion à la base de données SQLite
+            $bdd = new SQLite3('database.sqlite');
+
+            // Vérification de la connexion
+            if (!$bdd) {
+                die("Erreur de connexion à la base de données");
+            }
+
+            // Vérifier si le formulaire a été soumis
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Récupérer la requête soumise par l'utilisateur
+                $sql_query = $_POST['sql_query'] ?? '';
+
+                // Exécuter la requête SQL
+                if (!empty($sql_query)) {
+                    $result = $bdd->query($sql_query);
+
+                    // Vérification du résultat de la requête
+                    if ($result) {
+                        // Affichage des résultats de la requête
+                        echo "<h2>Résultats de la requête :</h2>";
+                        echo "<table class='table table-bordered'>";
+                        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                            echo "<tr>";
+                            foreach ($row as $key => $value) {
+                                echo "<td>$key</td><td>$value</td>";
+                            }
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                    } else {
+                        // Affichage d'un message d'erreur si la requête a échoué
+                        echo "<h2>Erreur lors de l'exécution de la requête :</h2>";
+                        echo "<p>" . $bdd->lastErrorMsg() . "</p>";
+                    }
+                } else {
+                    // Afficher un message si aucun requête n'a été soumise
+                    echo "<h2>Aucune requête soumise.</h2>";
+                }
+            }
+
+            // Fermeture de la connexion à la base de données
+            $bdd->close();
+            ?>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->

@@ -63,13 +63,10 @@ body {
     text-align: center;
 }
 
-.logo {
-    
-}
 
 .logo img {
-    max-height: 130px; /* Ajustez la hauteur maximale selon vos besoins */
-    max-width: 150%; /* Garantit que l'image ne dépasse pas la largeur du conteneur */
+    max-height: 80px; /* Ajustez la hauteur maximale selon vos besoins */
+    max-width: 100%; /* Garantit que l'image ne dépasse pas la largeur du conteneur */
 }
 
 .photo-preview-container {

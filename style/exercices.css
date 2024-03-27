@@ -1,0 +1,14 @@
+.center-title {
+    text-align: center;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.query-form {
+    width: 45%;
+}
+.query-results {
+    width: 50%;
+}
