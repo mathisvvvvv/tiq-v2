@@ -67,6 +67,13 @@ if ($authentication_successful) {
     <title>Connexion</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/header_menu.css">
+    <style>
+        body {
+            background-image: url('img/fond_ecran.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 
 <body>
@@ -95,16 +102,20 @@ if ($authentication_successful) {
                 <label for="password">Mot de passe :</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
+            <div class="col text-right">
+            <a class="mt-4" href="??">Mot de passe oublié</a>
+        </div>
 
             <div class="d-flex justify-content-between">
                 <input class="btn btn-success" type="submit" value="Connexion">
             </div>
         </form>
-        <a class="mt-4" href="??">Mot de passe oublié</a>
+        <a class="mt-4"  href="inscription.php">Pas de compte ? S'inscrire</a>
+
     </div>
     
     <!-- Barre latérale en bas -->
-    <div class="footer-sidebar bg-dark fixed-bottom text-white p-4">
+    <div class="footer-sidebar bg-dark text-white p-4">
         <h4>Coordonnées de l'entreprise</h4>
         <p>Adresse : Université de Bordeaux</p>
         <p>Téléphone : 06 06 06 06 06</p>

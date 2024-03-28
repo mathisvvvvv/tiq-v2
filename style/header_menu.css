@@ -95,3 +95,13 @@ body {
     border-radius: 50%; /* Pour une photo de profil arrondie */
     margin-right: 10px; /* Espace entre la photo et le texte */
 }
+
+.footer-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Couleur de fond de votre choix /
+    color: white; / Couleur du texte de votre choix /
+    padding: 20px; / Espace intérieur de votre choix */
+}
